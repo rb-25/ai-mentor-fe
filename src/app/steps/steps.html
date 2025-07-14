@@ -1,0 +1,29 @@
+<div class="steps-layout">
+  <aside class="sidebar">
+    <div class="logo">Your Logo</div>
+    <nav>
+      <a routerLink="/resources">Resources</a>
+      <a routerLink="/projects">Projects</a>
+      <a routerLink="/add-project">Add New Project</a>
+    </nav>
+  </aside>
+  <main class="steps-main">
+    <div class="step-container" *ngIf="steps.length">
+      <h2>{{ currentStep.name }}</h2>
+      <p>{{ currentStep.description }}</p>
+      <p class="deadline"><strong>Deadline:</strong> {{ currentStep.deadline }}</p>
+      <div class="completed-checkbox">
+        <input type="checkbox" id="completed" [(ngModel)]="completed" />
+        <label for="completed">Completed</label>
+      </div>
+      <div class="navigation-buttons">
+        <button (click)="previousStep()" [disabled]="currentStepIndex === 0">Previous</button>
+        <button (click)="nextStep()" [disabled]="currentStepIndex === steps.length - 1">Next</button>
+      </div>
+    </div>
+    <div *ngIf="!steps.length && !loading && !errorMessage" class="no-steps">No steps found for this project.</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="loading" class="loading">Loading...</div>
+  </main>
+</div>
+  

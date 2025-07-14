@@ -1,0 +1,19 @@
+<div class="experience-container">
+    <h1 class="title">What’s your experience level?</h1>
+    <p class="subtitle">This helps us tailor content based on your experience.</p>
+  
+    <div class="grid">
+      <div
+        class="card"
+        *ngFor="let level of levels"
+        [class.selected]="selected === level.label"
+        (click)="selectLevel(level.label)"
+      >
+        <div class="icon">{{ level.icon }}</div>
+        <div class="label">{{ level.label }}</div>
+      </div>
+    </div>
+  
+    <button class="next-btn" [disabled]="!selected" (click)="next()">Continue</button>
+  </div>
+  

@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background: #f9f9f3;
+  }
+  
+  .resources-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 260px;
+    background: #191919;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 48px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    color: #fff;
+}
+
+.resources-main {
+    flex: 1;
+    padding: 48px 48px 32px 48px;
+    background: #f9f9f3;
+    min-height: 100vh;
+}
+
+.resources-header {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #191919;
+    margin-bottom: 32px;
+}
+
+.resources-loading,
+.resources-error {
+    font-size: 1.2rem;
+    color: #5379f6;
+    margin-bottom: 24px;
+}
+
+.interest-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #5379f6;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+.resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.resource-link {
+    display: inline-block;
+    background: #fff;
+    color: #5379f6;
+    border: 2px solid #5379f6;
+    border-radius: 1000px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.resource-link:hover {
+    background: #5379f6;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .resources-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        flex-direction: row;
+        width: 100vw;
+        min-height: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .resources-main {
+        padding: 24px 8px;
+    }
+}

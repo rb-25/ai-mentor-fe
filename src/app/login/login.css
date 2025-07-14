@@ -1,0 +1,161 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.left-pane {
+  flex: 1;
+  background: url('/assets/bg.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.brand-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  margin: 0;
+}
+
+.right-pane {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px 0 0 13px;
+}
+
+.form-wrapper {
+  width: 350px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #191d23;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 5px;
+  border: 1px solid #d0d5dd;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background-color: #5379f6;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.btn.secondary {
+  background-color: #e4e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.divider {
+  text-align: center;
+  color: #999da3;
+  font-size: 12px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  height: 1px;
+  background: #ccc;
+  position: absolute;
+  top: 50%;
+  width: 40%;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #999da3;
+}
+
+.signup-text a {
+  color: #5379f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}

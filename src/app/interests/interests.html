@@ -1,0 +1,19 @@
+<div class="interests-container">
+  <h1 class="title">What are your interests?</h1>
+  <p class="subtitle">This helps us tailor your experience. No experience needed!</p>
+
+  <div class="grid">
+    <div
+      class="card"
+      *ngFor="let interest of interests"
+      [class.selected]="selected.has(interest.label)"
+      (click)="toggleInterest(interest.label)"
+    >
+      <div class="icon">{{ interest.icon }}</div>
+      <div class="label">{{ interest.label }}</div>
+    </div>
+  </div>
+
+  <button class="next-btn" (click)="next()">Continue</button>
+</div>
+

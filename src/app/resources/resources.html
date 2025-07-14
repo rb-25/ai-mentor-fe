@@ -1,0 +1,27 @@
+<div class="resources-layout">
+    <aside class="sidebar">
+      <div class="logo">Your Logo</div>
+      <nav>
+        <a routerLink="/resources" class="active">Resources</a>
+        <a routerLink="/projects">Projects</a>
+        <a routerLink="/add-project">Add New Project</a>
+      </nav>
+    </aside>
+    <main class="resources-main">
+      <h1 class="resources-header">Resources</h1>
+      <div *ngIf="loading" class="resources-loading">Loading...</div>
+      <div *ngIf="errorMessage" class="resources-error">{{ errorMessage }}</div>
+      <div *ngIf="!loading && !errorMessage">
+        <div *ngFor="let interest of (resourcesByInterest | keyvalue)">
+          <h2 class="interest-title">{{ interest.key | titlecase }}</h2>
+          <ul class="resource-list">
+            <li *ngFor="let res of interest.value">
+              <a [href]="res.resource" target="_blank" rel="noopener" class="resource-link">
+                {{ res.resource }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>

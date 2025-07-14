@@ -1,0 +1,54 @@
+<div class="login-container">
+  <div class="left-pane">
+    <div class="logo-box">
+      <img src="assets/logo.svg" alt="Gibspons Logo" class="logo-icon" />
+      <div>
+        <h1 class="brand-name">gibspons</h1>
+        <p class="brand-sub">sponsorships made easier</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-pane">
+    <div class="form-wrapper">
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input [(ngModel)]="email" name="email" type="email" placeholder="xyz@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label>Password</label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+          <input [(ngModel)]="password" name="password" type="password" required />
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Keep me signed in</label>
+        </div>
+
+        <button class="btn primary" [disabled]="loading" type="submit">Login</button>
+
+        <div class="divider">
+          <span>or sign in with</span>
+        </div>
+
+        <button class="btn secondary" (click)="onGoogleLogin()" type="button">
+          <img src="assets/google-icon.svg" alt="Google" />
+          Continue with Google
+        </button>
+
+        <p class="signup-text">
+          Don’t have an account yet?
+          <a href="/signup">Sign Up.</a>
+        </p>
+
+        <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>

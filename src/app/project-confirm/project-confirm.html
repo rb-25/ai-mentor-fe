@@ -1,0 +1,26 @@
+<div class="confirm-layout">
+  <aside class="sidebar">
+    <div class="logo">Your Logo</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/resources">Resources</a></li>
+        <li><a routerLink="/projects">Projects</a></li>
+        <li><a routerLink="/add-project">Add New Project</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main class="confirm-main">
+    <div class="confirm-container">
+      <div *ngIf="!loading && errorMessage" class="error">{{ errorMessage }}</div>
+      <div *ngIf="!loading && !errorMessage && project">
+        <h2>{{ project.project_name }}</h2>
+        <p class="description">{{ project.project_description }}</p>
+        <div class="question">Do you want to start this project?</div>
+        <div class="actions">
+          <button class="yes" (click)="startProject()">Yes</button>
+          <button class="no" (click)="cancel()">No</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div> 

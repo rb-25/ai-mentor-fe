@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background: #f9f9f3;
+}
+
+.projects-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #191919;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 4px 0;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #fff;
+}
+
+.projects-main {
+  flex: 1;
+  padding: 48px 48px 32px 48px;
+  background: #f9f9f3;
+  min-height: 100vh;
+}
+
+.projects-header {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #191919;
+  margin-bottom: 32px;
+}
+
+.projects-loading,
+.projects-error {
+  font-size: 1.2rem;
+  color: #5379f6;
+  margin-bottom: 24px;
+}
+
+.status-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #5379f6;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.project-item {
+  background: #fff;
+  border: 2px solid #5379f6;
+  border-radius: 16px;
+  padding: 18px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #191919;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(83, 121, 246, 0.04);
+}
+
+.project-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.project-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.project-meta {
+  font-size: 0.95rem;
+  color: #5379f6;
+  display: flex;
+  gap: 16px;
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(83, 121, 246, 0.04);
+  margin-top: 24px;
+}
+.projects-table th, .projects-table td {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 1rem;
+}
+.projects-table th {
+  color: #191919;
+  font-weight: 700;
+  background: #f5f6fa;
+}
+.projects-table tr:not(:last-child) td {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  min-width: 90px;
+  text-align: center;
+}
+.badge-notstarted {
+  background: #bdbdbd;
+}
+.badge-inprogress {
+  background: #5379f6;
+}
+.badge-completed {
+  background: #1dbf73;
+} 

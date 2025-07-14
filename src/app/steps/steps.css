@@ -1,0 +1,99 @@
+.steps-layout {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 260px;
+  background: #191919;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+}
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sidebar nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 4px 0;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #fff;
+}
+.steps-main {
+  flex: 1;
+  padding: 48px 48px 32px 48px;
+  background: #f9f9f3;
+  min-height: 100vh;
+}
+.step-container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 32px;
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 8px rgba(83, 121, 246, 0.08);
+}
+.step-container h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+.step-container p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #666;
+}
+.deadline {
+  font-style: italic;
+  color: #aa0000;
+}
+.completed-checkbox {
+  margin: 24px 0 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.navigation-buttons {
+  margin-top: 24px;
+}
+.navigation-buttons button {
+  padding: 10px 20px;
+  margin: 0 12px;
+  background-color: #5379F6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.navigation-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.no-steps, .error, .loading {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 1.1rem;
+}
+.error {
+  color: #d32f2f;
+}
+.loading {
+  color: #5379f6;
+}
+  

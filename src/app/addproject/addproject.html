@@ -1,0 +1,29 @@
+<div class="container">
+    <aside class="sidebar">
+      <div class="logo">Your Logo</div>
+      <nav>
+        <a routerLink="/resources">Resources</a>
+        <a routerLink="/projects">Projects</a>
+        <a routerLink="/add-project" class="active">Add New Project</a>
+      </nav>
+    </aside>
+  
+    <main class="form-section">
+      <h1>Create Your Project</h1>
+      <p>Fill in the details of your project.</p>
+  
+      <form (ngSubmit)="submitProject()" #projectForm="ngForm">
+        <label>Project Name</label>
+        <input type="text" required [(ngModel)]="project.name" name="name" />
+  
+        <label>Field</label>
+        <input type="text" required [(ngModel)]="project.field" name="field" />
+  
+        <label>Description</label>
+        <textarea rows="4" required [(ngModel)]="project.description" name="description"></textarea>
+  
+        <button type="submit">Create Project</button>
+      </form>
+    </main>
+  </div>
+  
