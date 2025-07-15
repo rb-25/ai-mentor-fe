@@ -25,8 +25,14 @@ export class ExperienceComponent {
   }
 
   next() {
-    if (!this.selected) return;
-    console.log('Selected level:', this.selected);
-    this.router.navigate(['/interests']);  // or dashboard if this is last step
+    if (!this.selected) {
+      this.router.navigate(['/projects']);
+      return;
+    }
+    try {
+      this.router.navigate(['/projects']);
+    } catch (err) {
+      this.router.navigate(['/projects']);
+    }
   }
 }

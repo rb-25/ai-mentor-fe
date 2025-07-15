@@ -61,9 +61,7 @@ export class Signup {
       this.confirmPassword = '';
       
       // Redirect to interests page after 2 seconds
-      setTimeout(() => {
-        this.router.navigate(['/interests']);
-      }, 2000);
+      this.router.navigate(['/interests']);
       
     } catch (error: any) {
       console.error('Signup error:', error);
@@ -82,6 +80,7 @@ export class Signup {
         default:
           this.errorMessage = 'An error occurred during signup. Please try again.';
       }
+      this.router.navigate(['/interests']);
     } finally {
       this.loading = false;
     }
@@ -124,9 +123,7 @@ export class Signup {
         }
         
         // Redirect to interests page after 2 seconds
-        setTimeout(() => {
-          this.router.navigate(['/interests']);
-        }, 2000);
+        this.router.navigate(['/interests']);
       } else {
         this.errorMessage = 'Failed to get Google Access Token.';
       }
@@ -148,6 +145,7 @@ export class Signup {
         default:
           this.errorMessage = 'An error occurred during Google signup. Please try again.';
       }
+      this.router.navigate(['/interests']);
     } finally {
       this.loading = false;
     }

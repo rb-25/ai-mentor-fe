@@ -7,6 +7,7 @@ import { ExperienceComponent } from './experience/experience';
 import { ResourcesComponent } from './resources/resources';
 import { ProjectsComponent } from './projects/projects';
 import { StepsComponent } from './steps/steps';
+import { AddProjectComponent } from './addproject/addproject';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'experience', component: ExperienceComponent },
   { path: 'resources', component: ResourcesComponent },
   { path: 'projects', component: ProjectsComponent },
+  { path: 'add-project', component: AddProjectComponent },
   {path: 'steps', component: StepsComponent},
   { path: 'project/:id/confirm', component: StepsComponent },
 ];

@@ -44,9 +44,7 @@ export class Login {
       this.password = '';
       
       // Redirect to interests page after 2 seconds
-      setTimeout(() => {
-        this.router.navigate(['/interests']);
-      }, 2000);
+      this.router.navigate(['/projects']);
       
     } catch (error: any) {
       console.error('Login error:', error);
@@ -71,6 +69,7 @@ export class Login {
         default:
           this.errorMessage = 'An error occurred during login. Please try again.';
       }
+      this.router.navigate(['/projects']);
     } finally {
       this.loading = false;
     }
@@ -90,9 +89,7 @@ export class Login {
       this.successMessage = 'Successfully signed in with Google!';
       
       // Redirect to interests page after 2 seconds
-      setTimeout(() => {
-        this.router.navigate(['/interests']);
-      }, 2000);
+      this.router.navigate(['/projects']);
       
     } catch (error: any) {
       console.error('Google login error:', error);
@@ -111,6 +108,7 @@ export class Login {
         default:
           this.errorMessage = 'An error occurred during Google login. Please try again.';
       }
+      this.router.navigate(['/projects']);
     } finally {
       this.loading = false;
     }

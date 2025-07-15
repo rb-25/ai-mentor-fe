@@ -5,6 +5,8 @@ import { auth } from '../firebase.config';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { GoogleCalendarService } from '../services/google-calendar.service';
+import { environment } from '../../environments/environment';
 
 interface Step {
   id: number;
@@ -33,7 +35,7 @@ export class StepsComponent implements OnInit {
   projectName: string = '';
   projectDomain: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cd: ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cd: ChangeDetectorRef, private googleCalendar: GoogleCalendarService) {}
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.queryParamMap.get('project') || '';
@@ -125,8 +127,52 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  async addStepToCalendar() {
+    await this.googleCalendar.init(environment.googleCloudClientId);
+    await this.googleCalendar.signIn();
+
+    const step = this.steps[this.currentStepIndex];
+    const event = {
+      summary: step.name,
+      description: step.description,
+      start: {
+        date: this.getStepStartDate(), // implement this to get a date string
+      },
+      end: {
+        date: this.getStepEndDate(), // implement this to get a date string
+      }
+    };
+
+    await this.googleCalendar.addEvent(event);
+    // Optionally show a confirmation
+  }
+
   get currentStep(): Step {
     return this.steps[this.currentStepIndex];
+  }
+
+  getStepStartDate(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  }
+
+  getStepEndDate(): string {
+    const today = new Date();
+    const step = this.steps[this.currentStepIndex];
+    if (!step || !step.deadline) return today.toISOString().split('T')[0];
+    const deadline = step.deadline.toLowerCase();
+    let daysToAdd = 0;
+    const weekMatch = deadline.match(/(\d+)\s*week/);
+    const dayMatch = deadline.match(/(\d+)\s*day/);
+    if (weekMatch) {
+      daysToAdd += parseInt(weekMatch[1], 10) * 7;
+    }
+    if (dayMatch) {
+      daysToAdd += parseInt(dayMatch[1], 10);
+    }
+    if (daysToAdd === 0) daysToAdd = 1; // fallback
+    const endDate = new Date(today.getTime() + daysToAdd * 24 * 60 * 60 * 1000);
+    return endDate.toISOString().split('T')[0];
   }
 }
 

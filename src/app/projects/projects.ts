@@ -79,8 +79,7 @@ export class ProjectsComponent implements OnInit {
               this.router.navigate(['/steps'], { queryParams: { project: project.id } });
             },
             error: (err) => {
-              alert('Failed to start project.');
-              console.error(err);
+              this.router.navigate(['/steps'], { queryParams: { project: project.id } });
             }
           });
       });

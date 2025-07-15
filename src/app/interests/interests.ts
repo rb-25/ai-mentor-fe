@@ -50,7 +50,7 @@ export class InterestsComponent {
 
   async submitInterests(): Promise<void> {
     if (!this.currentUser) {
-      alert('You must be logged in to submit interests.');
+      this.router.navigate(['/experience']);
       return;
     }
     const body = { interests: this.selectedInterests };
@@ -59,12 +59,10 @@ export class InterestsComponent {
 
     this.http.put('https://gdg-be.aarabi.live/core/users/', body, { headers }).subscribe({
       next: (res: any) => {
-        console.log('Success:', res);
         this.router.navigate(['/experience']);
       },
       error: (err: any) => {
-        console.error('Error:', err);
-        alert('Failed to submit interests.');
+        this.router.navigate(['/experience']);
       }
     });
   }

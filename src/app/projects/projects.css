@@ -12,6 +12,7 @@ html, body {
   height: 100%;
   width: 100%;
   background: #252525;
+  color: #fff;
   overflow-x: hidden;
 }
 
@@ -61,6 +62,7 @@ html, body {
 .title {
   font-size: 2.5rem; /* ~40px */
   margin-bottom: 1.5rem;
+  color: #fff;
 }
 
 .table {
@@ -75,7 +77,8 @@ html, body {
   display: flex;
   background: #1F1F1F;
   padding: 0.75rem 1.25rem;
-  font-size: 1.375rem; /* 22px */
+  font-size: 1.375rem;
+  color: #fff; /* 22px */
 }
 
 .table-row {
@@ -90,16 +93,28 @@ html, body {
 .col {
   flex: 1;
   min-width: 150px;
+  color: #fff;
 }
 
 .col.name {
   display: flex;
   align-items: center;
+  color: #fff;
 }
 
 .star {
   margin-right: 0.625rem;
   font-size: 1.1rem;
+  border-color: #fff;
+}
+
+.star-col {
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badge {
@@ -152,4 +167,38 @@ html, body {
 
 .completed {
   background-color: #72F15A;
+}
+
+.table-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.add-project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #5379F6;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 2rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(83, 121, 246, 0.15);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.add-project-btn:hover {
+  background: #3357c9;
+  box-shadow: 0 4px 16px rgba(83, 121, 246, 0.25);
+}
+
+.plus-icon {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+  pointer-events: none;
 }
