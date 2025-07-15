@@ -1,45 +1,40 @@
-<div class="projects-layout">
-  <aside class="sidebar">
-    <div class="logo">Your Logo</div>
-    <nav>
-      <a routerLink="/resources">Resources</a>
-      <a routerLink="/projects" class="active">Projects</a>
-      <a routerLink="/add-project">Add New Project</a>
-    </nav>
-  </aside>
-  <main class="projects-main">
-    <h1 class="projects-header">Projects</h1>
-    <div *ngIf="loading" class="projects-loading">Loading...</div>
-    <div *ngIf="errorMessage" class="projects-error">{{ errorMessage }}</div>
-    <div *ngIf="!loading && !errorMessage">
-      <table class="projects-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Domain</th>
-            <th>Current Step</th>
-            <th>Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let proj of getAllProjects()" (click)="goToConfirm(proj)" class="project-row">
-            <td>{{ proj.project_name }}</td>
-            <td>{{ proj.project_domain }}</td>
-            <td>
-              <ng-container *ngIf="proj.steps && proj.steps.length > 0; else noSteps">
-                <ng-container *ngIf="getCurrentStep(proj) as step; else allDone">
-                  {{ step.name }}
-                </ng-container>
-              </ng-container>
-              <ng-template #noSteps>No Steps</ng-template>
-              <ng-template #allDone>All Steps Completed</ng-template>
-            </td>
-            <td>
-              <span class="badge" [ngClass]="getProgressClass(proj)">{{ getProgressText(proj) }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container">
+  <div class="navbar">
+    <div class="logo-box"></div>
+    <a class="nav-link active" href="/projects">projects</a>
+    <a class="nav-link" href="/resources">resources</a>
+  </div>
+
+  <div class="content">
+    <h1 class="title">all projects</h1>
+    <div class="table">
+      <div class="table-header">
+        <div class="col name">name</div>
+        <div class="col domain">domain</div>
+        <div class="col status">status</div>
+      </div>
+
+      <div *ngFor="let project of projects" class="table-row">
+        <div class="col name">
+          <span class="star">{{ project.is_starred ? '⭐' : '☆' }}</span>
+          {{ project.project_name }}
+        </div>
+        <div class="col domain">{{ project.project_domain }}</div>
+        <div class="col status">
+          <span [ngClass]="{
+            'badge': true,
+            'not-started': project.is_started === false,
+            'in-progress': project.is_started === true,
+            'completed': project.is_completed === true
+          }"
+          [attr.data-hover-text]="project.is_started === false ? 'start project' : null"
+          (click)="goToSteps(project)"
+          role="button"
+          tabindex="0">
+            <span>{{ project.is_started ? 'in progress' : 'not started' }}</span>
+          </span>
+        </div>
+      </div>
     </div>
-  </main>
-</div> 
+  </div>
+</div>

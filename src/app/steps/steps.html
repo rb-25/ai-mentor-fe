@@ -1,29 +1,44 @@
-<div class="steps-layout">
-  <aside class="sidebar">
-    <div class="logo">Your Logo</div>
-    <nav>
-      <a routerLink="/resources">Resources</a>
-      <a routerLink="/projects">Projects</a>
-      <a routerLink="/add-project">Add New Project</a>
-    </nav>
-  </aside>
-  <main class="steps-main">
-    <div class="step-container" *ngIf="steps.length">
-      <h2>{{ currentStep.name }}</h2>
-      <p>{{ currentStep.description }}</p>
-      <p class="deadline"><strong>Deadline:</strong> {{ currentStep.deadline }}</p>
-      <div class="completed-checkbox">
-        <input type="checkbox" id="completed" [(ngModel)]="completed" />
-        <label for="completed">Completed</label>
+<div class="container">
+  <div class="navbar">
+    <div class="logo-box"></div>
+    <a class="nav-link" routerLink="/projects">projects</a>
+    <a class="nav-link" routerLink="/resources">resources</a>
+  </div>
+  <div class="main-section">
+    <h1 class="title">{{ projectName }}</h1>
+    <h3 class="subtitle">{{ projectDomain }}</h3>
+
+    <div class="actions">
+      <button class="calendar-btn">📅 add step to calendar</button>
+      <button class="complete-btn" (click)="markComplete()">mark complete ✔</button>
+    </div>
+
+    <div class="step-content" *ngIf="steps.length">
+      <div class="step-header">
+        <div class="step-number">{{ steps[currentStepIndex].ordering }}</div>
+        <h2 class="step-title">Step {{ steps[currentStepIndex].ordering }}: {{ steps[currentStepIndex].name }}</h2>
+        <span class="deadline">{{ steps[currentStepIndex].deadline }}</span>
       </div>
-      <div class="navigation-buttons">
-        <button (click)="previousStep()" [disabled]="currentStepIndex === 0">Previous</button>
-        <button (click)="nextStep()" [disabled]="currentStepIndex === steps.length - 1">Next</button>
+      <p class="description">{{ steps[currentStepIndex].description }}</p>
+    </div>
+
+    <div class="navigation">
+      <button (click)="prevStep()">◀ view previous step</button>
+      <button (click)="nextStep()">view next step ▶</button>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div *ngFor="let step of steps" class="sidebar-step">
+      <div class="circle" [class.completed]="step.is_completed">{{ step.ordering }}</div>
+      <div class="info">
+        <div class="name">Step {{ step.ordering }}: {{ step.name }}</div>
+        <div class="status">
+          {{ step.is_completed ? 'completed on July 13th' : 'yet to be completed' }}
+        </div>
       </div>
     </div>
-    <div *ngIf="!steps.length && !loading && !errorMessage" class="no-steps">No steps found for this project.</div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    <div *ngIf="loading" class="loading">Loading...</div>
-  </main>
+  </div>
 </div>
+
   

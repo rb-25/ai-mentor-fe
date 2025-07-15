@@ -1,27 +1,28 @@
-<div class="resources-layout">
-    <aside class="sidebar">
-      <div class="logo">Your Logo</div>
-      <nav>
-        <a routerLink="/resources" class="active">Resources</a>
-        <a routerLink="/projects">Projects</a>
-        <a routerLink="/add-project">Add New Project</a>
-      </nav>
-    </aside>
-    <main class="resources-main">
-      <h1 class="resources-header">Resources</h1>
-      <div *ngIf="loading" class="resources-loading">Loading...</div>
-      <div *ngIf="errorMessage" class="resources-error">{{ errorMessage }}</div>
-      <div *ngIf="!loading && !errorMessage">
-        <div *ngFor="let interest of (resourcesByInterest | keyvalue)">
-          <h2 class="interest-title">{{ interest.key | titlecase }}</h2>
-          <ul class="resource-list">
-            <li *ngFor="let res of interest.value">
-              <a [href]="res.resource" target="_blank" rel="noopener" class="resource-link">
-                {{ res.resource }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </main>
+<div class="container">
+  <div class="navbar">
+    <div class="logo-box"></div>
+    <a class="nav-link" routerLink="/projects">projects</a>
+    <a class="nav-link active" routerLink="/resources">resources</a>
   </div>
+
+  <div class="content">
+    <h1 class="title">all resources</h1>
+    <div *ngIf="errorMessage" class="resources-error">{{ errorMessage }}</div>
+    <div class="table" *ngIf="!loading && !errorMessage">
+      <div class="table-header">
+        <div class="col name">resource</div>
+        <div class="col domain">interest</div>
+      </div>
+      <ng-container *ngFor="let interest of (resourcesByInterest | keyvalue)">
+        <ng-container *ngFor="let res of interest.value">
+          <div class="table-row">
+            <div class="col name">
+              <a class="resource-link" [href]="res.resource" target="_blank" rel="noopener">{{ res.resource }}</a>
+            </div>
+            <div class="col domain">{{ interest.key | titlecase }}</div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

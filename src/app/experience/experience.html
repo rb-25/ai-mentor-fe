@@ -1,19 +1,22 @@
-<div class="experience-container">
-    <h1 class="title">What’s your experience level?</h1>
-    <p class="subtitle">This helps us tailor content based on your experience.</p>
-  
-    <div class="grid">
-      <div
-        class="card"
-        *ngFor="let level of levels"
-        [class.selected]="selected === level.label"
-        (click)="selectLevel(level.label)"
-      >
-        <div class="icon">{{ level.icon }}</div>
-        <div class="label">{{ level.label }}</div>
-      </div>
+<div class="container">
+  <h1 class="title">what is your <span class="highlight">experience level?</span></h1>
+
+  <div class="experience-wrapper">
+    <div class="experience-column">
+      <label *ngFor="let level of levels.slice(0, 3)" class="experience-label">
+        <input type="radio" name="experience" [value]="level.label" (change)="selectLevel(level.label)" [checked]="selected === level.label" />
+        {{ level.label }}
+      </label>
     </div>
-  
-    <button class="next-btn" [disabled]="!selected" (click)="next()">Continue</button>
   </div>
+
+  <div class="footer">
+    <p class="warning" *ngIf="!selected">
+      please select your experience level
+    </p>
+    <button [disabled]="!selected" (click)="next()">
+      continue
+    </button>
+  </div>
+</div>
   

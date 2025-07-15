@@ -1,19 +1,31 @@
-<div class="interests-container">
-  <h1 class="title">What are your interests?</h1>
-  <p class="subtitle">This helps us tailor your experience. No experience needed!</p>
+<div class="container">
+  <h1 class="title">what are your <span class="highlight">interests?</span></h1>
 
-  <div class="grid">
-    <div
-      class="card"
-      *ngFor="let interest of interests"
-      [class.selected]="selected.has(interest.label)"
-      (click)="toggleInterest(interest.label)"
-    >
-      <div class="icon">{{ interest.icon }}</div>
-      <div class="label">{{ interest.label }}</div>
+  <div class="interests-wrapper">
+    <div class="interests-column">
+      <label *ngFor="let interest of leftColumn" class="interest-label">
+        <input type="checkbox" [value]="interest.value" (change)="onCheckboxChange($event)" />
+        {{ interest.label }}
+      </label>
+    </div>
+
+    <div class="interests-column">
+      <label *ngFor="let interest of rightColumn" class="interest-label">
+        <input type="checkbox" [value]="interest.value" (change)="onCheckboxChange($event)" />
+        {{ interest.label }}
+      </label>
     </div>
   </div>
 
-  <button class="next-btn" (click)="next()">Continue</button>
+  <div class="footer">
+    <p class="warning" *ngIf="selectedInterests.length < 2">
+      please select atleast 2 interests
+    </p>
+    <button [disabled]="selectedInterests.length < 2" (click)="submitInterests()">
+      continue
+    </button>
+  </div>
 </div>
+
+
 

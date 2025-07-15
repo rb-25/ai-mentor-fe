@@ -7,12 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 interface Step {
+  id: number;
   ordering: number;
   name: string;
   description: string;
   deadline: string;
-  is_completed?: boolean;
-  id: number; // Added id for update
+  is_completed: boolean;
 }
 
 @Component({
@@ -30,6 +30,8 @@ export class StepsComponent implements OnInit {
   errorMessage = '';
   currentUser: User | null = null;
   completed: boolean = false;
+  projectName: string = '';
+  projectDomain: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private cd: ChangeDetectorRef) {}
 
@@ -59,7 +61,9 @@ export class StepsComponent implements OnInit {
     this.http.get<any>(`https://gdg-be.aarabi.live/api/core/user-projects/${this.projectId}`, { headers }).subscribe({
       next: (project) => {
         console.log('Steps page: API response:', project);
-        this.steps = project.steps || [];
+        this.projectName = project.name || '';
+        this.projectDomain = project.domain || '';
+        this.steps = (project.steps || []).sort((a: Step, b: Step) => a.ordering - b.ordering);
         // Find the current step (first incomplete step, or last if all complete)
         let idx = 0;
         if (project.current_step) {
@@ -85,34 +89,36 @@ export class StepsComponent implements OnInit {
     });
   }
 
-  nextStep() {
+  nextStep(): void {
     if (this.currentStepIndex < this.steps.length - 1) {
-      this.updateStepCompletion(this.currentStep.id, this.completed, () => {
-        this.currentStepIndex++;
-        this.completed = !!this.steps[this.currentStepIndex]?.is_completed;
-      });
+      this.currentStepIndex++;
+      this.completed = !!this.steps[this.currentStepIndex]?.is_completed;
     }
   }
 
-  previousStep() {
+  prevStep(): void {
     if (this.currentStepIndex > 0) {
       this.currentStepIndex--;
       this.completed = !!this.steps[this.currentStepIndex]?.is_completed;
     }
   }
 
-  updateStepCompletion(stepId: number, isCompleted: boolean, callback: () => void) {
+  markComplete(): void {
     if (!this.currentUser) return;
-    const url = `https://gdg-be.aarabi.live/api/core/steps/${stepId}/`;
-    const body = { id: stepId, is_completed: isCompleted };
+    const step = this.steps[this.currentStepIndex];
+    if (!step || step.is_completed) return;
+    const url = `https://gdg-be.aarabi.live/api/core/steps/${step.id}/`;
+    const body = { id: step.id, is_completed: true };
     this.currentUser.getIdToken().then(token => {
       const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
       this.http.patch(url, body, { headers }).subscribe({
         next: () => {
-          callback();
+          step.is_completed = true;
+          this.completed = true;
+          this.cd.detectChanges();
         },
         error: (err) => {
-          alert('Failed to update step completion.');
+          alert('Failed to mark step as complete.');
           console.error(err);
         }
       });

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase.config';
+import { GoogleTasksService } from '../services/google-tasks.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,10 @@ export class Signup {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private googleTasksService: GoogleTasksService
+  ) {}
 
   async onSignup() {
     // Reset messages
@@ -90,15 +95,41 @@ export class Signup {
     this.loading = true;
 
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      // Use the Google Tasks service to sign in
+      const result = await this.googleTasksService.signInWithGoogle();
       
-      this.successMessage = 'Successfully signed up with Google!';
-      
-      // Redirect to interests page after 2 seconds
-      setTimeout(() => {
-        this.router.navigate(['/interests']);
-      }, 2000);
+      if (result) {
+        const { user, accessToken } = result;
+        
+        // Initialize Google Tasks API using environment variable
+        const clientId = environment.googleCloudClientId;
+        const initialized = await this.googleTasksService.initGoogleTasksApi(accessToken, clientId);
+        
+        if (initialized) {
+          this.successMessage = 'Successfully signed up with Google and connected to Tasks API!';
+          
+          // Example: List task lists and add a sample task
+          try {
+            const taskLists = await this.googleTasksService.listTaskLists();
+            if (taskLists && taskLists.length > 0) {
+              const defaultTaskListId = taskLists[0].id;
+              await this.googleTasksService.addTask(defaultTaskListId, "Welcome to Guidy! Your first task from the app.");
+            }
+          } catch (taskError) {
+            console.error('Error with tasks:', taskError);
+            // Don't fail the signup if tasks fail
+          }
+        } else {
+          this.successMessage = 'Successfully signed up with Google! (Tasks API not available)';
+        }
+        
+        // Redirect to interests page after 2 seconds
+        setTimeout(() => {
+          this.router.navigate(['/interests']);
+        }, 2000);
+      } else {
+        this.errorMessage = 'Failed to get Google Access Token.';
+      }
       
     } catch (error: any) {
       console.error('Google signup error:', error);

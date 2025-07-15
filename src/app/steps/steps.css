@@ -1,99 +1,189 @@
-.steps-layout {
-  display: flex;
-  min-height: 100vh;
-}
-.sidebar {
-  width: 260px;
-  background: #191919;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  padding: 40px 20px;
-}
-.sidebar .logo {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 48px;
-}
-.sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.sidebar nav a {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 4px 0;
-}
-.sidebar nav a:hover,
-.sidebar nav a.active {
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: #252525;
   color: #fff;
 }
-.steps-main {
-  flex: 1;
-  padding: 48px 48px 32px 48px;
-  background: #f9f9f3;
-  min-height: 100vh;
-}
-.step-container {
-  max-width: 600px;
-  margin: 80px auto;
-  padding: 32px;
-  background-color: #fff;
-  border-radius: 8px;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  box-shadow: 0 2px 8px rgba(83, 121, 246, 0.08);
-}
-.step-container h2 {
-  font-size: 24px;
-  margin-bottom: 16px;
-  color: #333;
-}
-.step-container p {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #666;
-}
-.deadline {
-  font-style: italic;
-  color: #aa0000;
-}
-.completed-checkbox {
-  margin: 24px 0 16px 0;
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  background: #202020;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  padding-left: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
-.navigation-buttons {
-  margin-top: 24px;
+
+.logo-box {
+  width: 4.5rem;
+  height: 1.7rem;
+  background: #D9D9D9;
+  margin-right: 2.5rem;
 }
-.navigation-buttons button {
-  padding: 10px 20px;
-  margin: 0 12px;
-  background-color: #5379F6;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
+
+.nav-link {
+  font-size: 1.125rem; /* 18px */
+  margin-right: 1.25rem;
+  font-weight: 200;
+  color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
 }
-.navigation-buttons button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+
+.nav-link.active {
+  font-weight: 500;
+  color: #5379F6;
 }
-.no-steps, .error, .loading {
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  background: #252525;
+  color: #fff;
+  padding-top: 60px; /* Push content below navbar */
+}
+
+.main-section {
+  flex: 1;
+  padding: 40px 40px;
+}
+
+.title {
+  font-size: 41px;
+  font-weight: 500;
+}
+
+
+.subtitle {
+  font-weight: 200;
+  color: #b0b0b0;
+  margin-top: 5px;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.calendar-btn {
+  background: #777;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.complete-btn {
+  background: #71C246;
+  color: black;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.step-content {
+  margin-top: 40px;
+  max-width: 640px;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  background: #5379F6;
+  border-radius: 50%;
   text-align: center;
-  margin-top: 32px;
-  font-size: 1.1rem;
+  line-height: 28px;
+  font-size: 18px;
 }
-.error {
-  color: #d32f2f;
+
+.step-title {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
 }
-.loading {
-  color: #5379f6;
+
+.deadline {
+  margin-left: auto;
+  font-size: 16px;
+  color: #fff;
 }
-  
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.navigation {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.navigation button {
+  background: #aaa;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.sidebar {
+  width: 520px;
+  background: #2B2B2B;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.circle {
+  width: 27px;
+  height: 27px;
+  border-radius: 10px;
+  background: #7C7C7C;
+  text-align: center;
+  line-height: 27px;
+  margin-right: 10px;
+}
+
+.circle.completed {
+  background: #5379F6;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-size: 14px;
+  color: #fff;
+}
+
+.status {
+  font-size: 12px;
+  color: #929292;
+}
+
